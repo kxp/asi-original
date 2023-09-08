@@ -19,4 +19,3 @@ The `data` directory will have the database files after the database initializat
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 
 ![maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
-[![macOS](https://svgshare.com/i/ZjP.svg)](https://svgshare.com/i/ZjP.svg)
