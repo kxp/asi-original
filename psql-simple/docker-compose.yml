@@ -13,4 +13,3 @@ services:
       - ./setup-master:/docker-entrypoint-initdb.d
     environment:
       - 'POSTGRES_PASSWORD=a_passwd234'
-      - 'POSTGRES_DB=asi_sales'
