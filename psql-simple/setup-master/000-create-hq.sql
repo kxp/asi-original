@@ -1,6 +1,6 @@
+-- Create HQ db 
 
--- creates the store db
-CREATE DATABASE "store_II_sb"
+CREATE DATABASE hq_db
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -8,10 +8,8 @@ CREATE DATABASE "store_II_sb"
     CONNECTION LIMIT = -1
     IS_TEMPLATE = False;
 
-
 -- Connect to the new database
-\c store_II_sb;
-
+\c hq_db;
 
 -- creates athe strore table
 
@@ -25,14 +23,11 @@ CREATE TABLE public.store
 ALTER TABLE IF EXISTS public.store
     OWNER to postgres;
 
-
-
 -- creates the product table
-
 
 CREATE TABLE public.product
 (
-    product_key uuid NOT NULL,
+    product_key uuid DEFAULT gen_random_uuid() NOT NULL,
     name text,
     description text,
     PRIMARY KEY (product_key)
@@ -49,7 +44,6 @@ CREATE TABLE public.customer
     nif integer NOT NULL,
     name text,
     address text,
-    phone_number integer,
     store_key integer,
     -- fk defs
     PRIMARY KEY (nif),
@@ -62,11 +56,9 @@ ALTER TABLE IF EXISTS public.customer
     OWNER to postgres;
     
 
--- creates the sale table
-
 CREATE TABLE public.sale
 (
-    sale_key uuid NOT NULL,
+    sale_key uuid DEFAULT gen_random_uuid() NOT NULL,
     purchase_time timestamp with time zone,
     purchase_amount numeric,
     store_key integer,
@@ -85,11 +77,10 @@ CREATE TABLE public.sale
 ALTER TABLE IF EXISTS public.sale
     OWNER to postgres;
 
--- creates the sale item table
 
 CREATE TABLE public.sale_item
 (
-    sale_item_key uuid NOT NULL,
+    sale_item_key uuid DEFAULT gen_random_uuid() NOT NULL,
     sale_key uuid NOT NULL,
     product_key uuid NOT NULL,
     item_price numeric NOT NULL,
@@ -107,14 +98,12 @@ CREATE TABLE public.sale_item
 ALTER TABLE IF EXISTS public.sale_item
     OWNER to postgres;
 
--- creates the store_product table
 
 CREATE TABLE public.store_product
 (
-    store_product_key uuid NOT NULL,
+    store_product_key uuid DEFAULT gen_random_uuid() NOT NULL,
     product_key uuid NOT NULL,
     store_id integer NOT NULL,
-    price numeric,
     PRIMARY KEY (store_product_key),
     -- sale fk for the store_key
     CONSTRAINT fk_store_id
@@ -128,4 +117,3 @@ CREATE TABLE public.store_product
 
 ALTER TABLE IF EXISTS public.store_product
     OWNER to postgres;
-

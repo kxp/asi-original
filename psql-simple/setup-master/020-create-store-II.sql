@@ -1,6 +1,6 @@
 
 -- creates the store db
-CREATE DATABASE "store_I_sb"
+CREATE DATABASE "store_II_sb"
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -10,7 +10,7 @@ CREATE DATABASE "store_I_sb"
 
 
 -- Connect to the new database
-\c store_I_sb;
+\c store_II_sb;
 
 
 -- creates athe strore table
@@ -32,7 +32,7 @@ ALTER TABLE IF EXISTS public.store
 
 CREATE TABLE public.product
 (
-    product_key uuid NOT NULL,
+    product_key uuid DEFAULT gen_random_uuid() NOT NULL,
     name text,
     description text,
     PRIMARY KEY (product_key)
@@ -66,7 +66,7 @@ ALTER TABLE IF EXISTS public.customer
 
 CREATE TABLE public.sale
 (
-    sale_key uuid NOT NULL,
+    sale_key uuid DEFAULT gen_random_uuid() NOT NULL,
     purchase_time timestamp with time zone,
     purchase_amount numeric,
     store_key integer,
@@ -89,7 +89,7 @@ ALTER TABLE IF EXISTS public.sale
 
 CREATE TABLE public.sale_item
 (
-    sale_item_key uuid NOT NULL,
+    sale_item_key uuid DEFAULT gen_random_uuid() NOT NULL,
     sale_key uuid NOT NULL,
     product_key uuid NOT NULL,
     item_price numeric NOT NULL,
@@ -111,7 +111,7 @@ ALTER TABLE IF EXISTS public.sale_item
 
 CREATE TABLE public.store_product
 (
-    store_product_key uuid NOT NULL,
+    store_product_key uuid DEFAULT gen_random_uuid() NOT NULL,
     product_key uuid NOT NULL,
     store_id integer NOT NULL,
     price numeric,
@@ -128,4 +128,3 @@ CREATE TABLE public.store_product
 
 ALTER TABLE IF EXISTS public.store_product
     OWNER to postgres;
-
